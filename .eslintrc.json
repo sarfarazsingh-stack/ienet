@@ -1,0 +1,10 @@
+{
+  "extends": "next/core-web-vitals",
+  "ignorePatterns": [
+    "lib/auth.ts",
+    "lib/api-helpers.ts",
+    "lib/rate-limit.ts",
+    "lib/db.ts",
+    "lib/email.ts"
+  ]
+}

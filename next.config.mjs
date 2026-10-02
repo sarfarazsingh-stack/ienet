@@ -1,17 +1,23 @@
+const isGithubPages = process.env.GITHUB_PAGES === "true";
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  reactStrictMode: true,
+  output: isGithubPages ? "export" : undefined,
+  basePath: isGithubPages ? "/ienet" : "",
   images: {
-    domains: ['avatars.githubusercontent.com'],
+    unoptimized: true,
+    domains: ["avatars.githubusercontent.com"],
     remotePatterns: [
       {
-        protocol: 'https',
-        hostname: '**.digitaloceanspaces.com',
+        protocol: "https",
+        hostname: "**.digitaloceanspaces.com",
       },
     ],
   },
   experimental: {
     serverActions: {
-      bodySizeLimit: '2mb',
+      bodySizeLimit: "10mb",
     },
   },
 };

@@ -1,0 +1,320 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: dark;
+  --abyss: #030708;
+  --abyss-2: #060b10;
+  --phosphor: #00ff88;
+  --amber: #ffb000;
+  --caution: #ff3366;
+  --titanium: #94a3b8;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  background: var(--abyss);
+  max-width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+body {
+  min-height: 100vh;
+  text-rendering: optimizeLegibility;
+}
+
+::selection {
+  background: rgba(0, 255, 136, 0.28);
+  color: #f4fff8;
+}
+
+:focus-visible {
+  outline: 1px solid var(--phosphor);
+  outline-offset: 3px;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: #030708;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #1a2824;
+  border: 2px solid #030708;
+}
+
+.abyss-grid {
+  background-color: #030708;
+  background-image:
+    radial-gradient(ellipse 90% 55% at 70% -10%, rgba(0, 255, 136, 0.07), transparent 52%),
+    radial-gradient(ellipse 50% 40% at 0% 100%, rgba(255, 176, 0, 0.04), transparent 50%),
+    linear-gradient(rgba(148, 163, 184, 0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(148, 163, 184, 0.04) 1px, transparent 1px);
+  background-size: auto, auto, 80px 80px, 80px 80px;
+}
+
+[data-mode="memo"] .abyss-grid {
+  background-image: radial-gradient(ellipse 80% 40% at 50% -10%, rgba(148, 163, 184, 0.06), transparent 55%);
+}
+
+.grain {
+  position: fixed;
+  inset: 0;
+  z-index: 54;
+  pointer-events: none;
+  opacity: 0.05;
+  mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='180' height='180'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%' height='100%' filter='url(%23n)' opacity='0.85'/></svg>");
+}
+
+[data-mode="memo"] .hud-extra {
+  display: none !important;
+}
+
+[data-mode="memo"] .reading {
+  color: #d7e0ea;
+  font-size: 1.05rem;
+  line-height: 1.7;
+}
+
+.plate {
+  position: relative;
+  border: 1px solid rgba(148, 163, 184, 0.2);
+  background: linear-gradient(180deg, rgba(8, 16, 22, 0.92), rgba(6, 11, 16, 0.8));
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.04);
+}
+
+.plate-corners::before,
+.plate-corners::after {
+  content: "";
+  position: absolute;
+  width: 16px;
+  height: 16px;
+  pointer-events: none;
+  border-color: rgba(0, 255, 136, 0.75);
+  border-style: solid;
+}
+
+.plate-corners::before {
+  top: -1px;
+  left: -1px;
+  border-width: 1px 0 0 1px;
+}
+
+.plate-corners::after {
+  right: -1px;
+  bottom: -1px;
+  border-width: 0 1px 1px 0;
+}
+
+.scanlines {
+  position: relative;
+}
+
+[data-mode="telemetry"] .scanlines::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: repeating-linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0) 0px,
+    rgba(0, 0, 0, 0) 2px,
+    rgba(0, 0, 0, 0.16) 3px
+  );
+  mix-blend-mode: multiply;
+  opacity: 0.35;
+}
+
+.machined-range {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  height: 44px;
+  background: transparent;
+  cursor: pointer;
+}
+
+.machined-range::-webkit-slider-runnable-track {
+  height: 4px;
+  border-radius: 999px;
+  background: linear-gradient(90deg, #00ff88 0%, #ffb000 68%, #ff3366 100%);
+}
+
+.machined-range::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 22px;
+  height: 36px;
+  margin-top: -16px;
+  border-radius: 2px;
+  border: 1px solid #00ff88;
+  background: #060b10;
+  box-shadow: 0 0 12px rgba(0, 255, 136, 0.35);
+}
+
+.machined-range::-moz-range-track {
+  height: 4px;
+  border: none;
+  border-radius: 999px;
+  background: linear-gradient(90deg, #00ff88 0%, #ffb000 68%, #ff3366 100%);
+}
+
+.machined-range::-moz-range-thumb {
+  width: 22px;
+  height: 36px;
+  border-radius: 2px;
+  border: 1px solid #00ff88;
+  background: #060b10;
+}
+
+@keyframes hull-pulse {
+  0%,
+  100% {
+    opacity: 0.28;
+  }
+  50% {
+    opacity: 0.9;
+  }
+}
+
+.hull-pulse {
+  animation: hull-pulse 2.8s ease-in-out infinite;
+}
+
+@keyframes ego-flash {
+  0%,
+  100% {
+    background-color: transparent;
+    box-shadow: none;
+  }
+  25%,
+  70% {
+    background-color: rgba(255, 51, 102, 0.18);
+    box-shadow: inset 0 0 0 1px rgba(255, 51, 102, 0.8);
+  }
+}
+
+.ego-flash {
+  animation: ego-flash 0.42s steps(2, end) 3;
+}
+
+@keyframes accept-glow {
+  0% {
+    box-shadow: 0 0 0 rgba(0, 255, 136, 0);
+  }
+  40% {
+    box-shadow: 0 0 28px rgba(0, 255, 136, 0.28);
+  }
+  100% {
+    box-shadow: 0 0 0 rgba(0, 255, 136, 0);
+  }
+}
+
+.accept-glow {
+  animation: accept-glow 0.9s ease-out 1;
+}
+
+.letter-parchment {
+  background:
+    radial-gradient(ellipse at top, rgba(255, 176, 0, 0.08), transparent 46%),
+    linear-gradient(180deg, #16130f 0%, #0d0b09 100%);
+  color: #eadcc8;
+}
+
+.letter-body p {
+  margin: 0 0 1.05rem;
+}
+
+.letter-body .lede::first-letter {
+  float: left;
+  margin: 0.12rem 0.55rem 0 0;
+  font-family: var(--font-serif), Georgia, serif;
+  font-size: 3.3rem;
+  line-height: 0.78;
+  color: #ffb000;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .hull-pulse,
+  .ego-flash,
+  .accept-glow {
+    animation: none !important;
+  }
+}
+
+@media print {
+  @page {
+    margin: 16mm 18mm;
+  }
+
+  html,
+  body {
+    background: #ffffff !important;
+    color: #141210 !important;
+    overflow: visible !important;
+  }
+
+  .no-print {
+    display: none !important;
+  }
+
+  .print-dossier {
+    display: block !important;
+    background: #ffffff !important;
+    color: #141210 !important;
+    max-width: none !important;
+    padding: 0 !important;
+  }
+
+  .print-dossier,
+  .print-dossier * {
+    color: #141210 !important;
+    background: transparent !important;
+    box-shadow: none !important;
+    text-shadow: none !important;
+  }
+
+  .print-dossier .letter-body,
+  .print-dossier .letter-body p,
+  .print-dossier h1,
+  .print-dossier h2 {
+    font-family: var(--font-serif), Georgia, "Times New Roman", serif !important;
+  }
+
+  .print-dossier .letter-kicker,
+  .print-dossier .letter-meta {
+    font-family: var(--font-mono), ui-monospace, monospace !important;
+    letter-spacing: 0.08em;
+    font-size: 9pt !important;
+  }
+
+  .print-dossier .letter-body {
+    font-size: 12pt !important;
+    line-height: 1.5 !important;
+  }
+
+  .print-dossier .lede::first-letter {
+    color: #141210 !important;
+  }
+
+  .print-dossier .signature-rule {
+    border-color: #141210 !important;
+  }
+}
