@@ -18,7 +18,17 @@ const config: Config = {
       },
     },
     extend: {
+      fontFamily: {
+        serif: ["var(--font-serif)", "Georgia", "Times New Roman", "serif"],
+        mono: ["var(--font-mono)", "ui-monospace", "SFMono-Regular", "monospace"],
+      },
       colors: {
+        abyss: "#030708",
+        abyss2: "#060B10",
+        phosphor: "#00FF88",
+        amber: "#FFB000",
+        caution: "#FF3366",
+        titanium: "#94A3B8",
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",

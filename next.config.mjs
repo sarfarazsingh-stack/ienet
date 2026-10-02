@@ -1,17 +1,18 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  reactStrictMode: true,
   images: {
-    domains: ['avatars.githubusercontent.com'],
+    domains: ["avatars.githubusercontent.com"],
     remotePatterns: [
       {
-        protocol: 'https',
-        hostname: '**.digitaloceanspaces.com',
+        protocol: "https",
+        hostname: "**.digitaloceanspaces.com",
       },
     ],
   },
   experimental: {
     serverActions: {
-      bodySizeLimit: '2mb',
+      bodySizeLimit: "10mb",
     },
   },
 };
