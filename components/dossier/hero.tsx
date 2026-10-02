@@ -22,7 +22,7 @@ export function Hero() {
   };
 
   return (
-    <section id="surface" className="scroll-mt-24 pb-8 pt-6 sm:pt-10">
+    <section id="surface" className="scroll-mt-4 pb-8 pt-2 sm:pt-4">
       <div className="grid items-center gap-10 lg:grid-cols-[minmax(0,1.15fr)_minmax(280px,0.85fr)] lg:gap-12">
         <div className="min-w-0">
           <p className="text-[11px] tracking-[0.34em] text-amber">DEPTH TO DEFECT // Q05</p>

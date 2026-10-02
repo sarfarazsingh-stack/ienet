@@ -14,8 +14,8 @@ export function LetterControls({ onOpen, prominent = false }: { onOpen: () => vo
       onClick={onOpen}
       className={
         prominent
-          ? "min-h-12 border border-amber bg-amber px-4 text-[11px] uppercase tracking-[0.16em] text-abyss"
-          : "min-h-12 border border-amber/80 bg-[#120e09]/90 px-4 text-[11px] uppercase tracking-[0.14em] text-amber shadow-[0_0_24px_rgba(255,176,0,0.18)] backdrop-blur"
+          ? "min-h-12 max-w-full whitespace-normal border border-amber bg-amber px-4 text-center text-[11px] uppercase leading-snug tracking-[0.16em] text-abyss"
+          : "min-h-12 w-full max-w-full whitespace-normal border border-amber/80 bg-[#120e09] px-3 text-center text-[11px] uppercase leading-snug tracking-[0.14em] text-amber sm:w-auto sm:px-4"
       }
     >
       Open full declassified letter
@@ -29,13 +29,17 @@ export function LetterDrawer({ open, onClose }: { open: boolean; onClose: () => 
   useEffect(() => {
     if (!open) return;
     const previous = document.body.style.overflow;
+    const scroller = document.querySelector<HTMLElement>("[data-scroll-root]");
+    const previousScroller = scroller?.style.overflow ?? "";
     document.body.style.overflow = "hidden";
+    if (scroller) scroller.style.overflow = "hidden";
     const onKey = (event: KeyboardEvent) => {
       if (event.key === "Escape") onClose();
     };
     window.addEventListener("keydown", onKey);
     return () => {
       document.body.style.overflow = previous;
+      if (scroller) scroller.style.overflow = previousScroller;
       window.removeEventListener("keydown", onKey);
     };
   }, [open, onClose]);

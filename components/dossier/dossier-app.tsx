@@ -31,15 +31,15 @@ function Shell() {
   const [letterOpen, setLetterOpen] = useState(false);
 
   return (
-    <div data-mode={mode} className="abyss-grid min-h-screen text-titanium">
+    <div data-mode={mode} className="abyss-grid flex h-dvh flex-col overflow-hidden text-titanium">
       <a
         href="#surface"
-        className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-16 focus:z-[90] focus:bg-phosphor focus:px-3 focus:py-2 focus:text-abyss"
+        className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-3 focus:z-[90] focus:bg-phosphor focus:px-3 focus:py-2 focus:text-abyss"
       >
         Skip to memorandum
       </a>
       <div className="grain" aria-hidden="true" />
-      <header className="fixed inset-x-0 top-0 z-50 flex h-12 items-center justify-between gap-3 border-b border-white/10 bg-abyss/85 px-3 backdrop-blur-md md:px-4">
+      <header className="z-50 flex h-12 shrink-0 items-center justify-between gap-3 border-b border-white/10 bg-abyss/85 px-3 backdrop-blur-md md:px-4">
         <div className="min-w-0 text-[10px] tracking-[0.18em] text-phosphor sm:text-[11px]">
           <span className="sm:hidden">FS-05 // RESTRICTED</span>
           <span className="hidden sm:inline">RESTRICTED // SCALEUP MASTERCLASS // QUESTION 05</span>
@@ -59,9 +59,9 @@ function Shell() {
         </div>
       </header>
 
-      <DepthGauge />
-
-      <main className="relative px-4 pb-28 pt-28 sm:px-6 md:pl-48 md:pr-8 md:pt-20">
+      <div className="flex min-h-0 flex-1 flex-col md:flex-row">
+        <DepthGauge />
+        <main data-scroll-root className="relative min-h-0 min-w-0 flex-1 overflow-y-auto overflow-x-hidden px-4 py-6 sm:px-6 md:px-8 md:py-8">
         <div className="mx-auto w-full max-w-[88rem]">
           <Hero />
           <Helm />
@@ -87,11 +87,14 @@ function Shell() {
             </div>
           </ModuleShell>
         </div>
-      </main>
-
-      <div className="fixed bottom-4 left-4 right-4 z-[65] flex justify-end md:left-auto md:right-6">
-        <LetterControls onOpen={() => setLetterOpen(true)} />
+        </main>
       </div>
+
+      <footer className="z-[56] shrink-0 border-t border-white/10 bg-[#070b10] px-3 py-2.5 sm:px-4">
+        <div className="flex justify-end" data-testid="letter-launcher">
+          <LetterControls onOpen={() => setLetterOpen(true)} />
+        </div>
+      </footer>
       <LetterDrawer open={letterOpen} onClose={() => setLetterOpen(false)} />
     </div>
   );

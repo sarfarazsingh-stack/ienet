@@ -22,7 +22,7 @@ export function ModuleShell({
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-8% 0px" }}
       transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
-      className="scroll-mt-28 py-16 sm:py-24"
+      className="scroll-mt-6 py-16 sm:py-24"
     >
       <header className="mb-8 flex items-start justify-between gap-4 sm:mb-10">
         <div className="min-w-0">
